@@ -1,5 +1,6 @@
 package com.axtech.xiaomeiedit.xiaomeiedit.activity.view;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,6 +28,8 @@ import com.axtech.xiaomeiedit.xiaomeiedit.base.BaseBean;
 import com.axtech.xiaomeiedit.xiaomeiedit.reyclerViewTouchMove.ItemTouchHelperAdapter;
 import com.axtech.xiaomeiedit.xiaomeiedit.reyclerViewTouchMove.SimpleItemTouchHelperCallback;
 import com.axtech.xiaomeiedit.xiaomeiedit.utils.Utils;
+import com.bm.library.Info;
+import com.bm.library.PhotoView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -290,6 +293,14 @@ public class WareDetailActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+            holder.iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(WareDetailActivity.this, ImageBrowseActivity.class);
+                    intent.putExtra(ImageBrowseActivity.INTENT_IMAGE_URL, Utils.getFileServerPath() + imgdata.get(position).getPath());
+                    WareDetailActivity.this.startActivity(intent);
+                }
+            });
             Utils.getPicasso().with(WareDetailActivity.this).load(Utils.getFileServerPath() + imgdata.get(position).getPath()).placeholder(R.mipmap.img_ware_loading).resize(240, 240).into(holder.iv);
             holder.closeImg.setOnClickListener(new View.OnClickListener() {
                 @Override

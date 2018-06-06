@@ -24,6 +24,7 @@
         <activity android:name=".activity.view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -32,6 +33,7 @@
         <activity android:name=".activity.view.TakePictureActivity" />
         <activity android:name=".zxing.activity.CaptureActivity" />
         <activity android:name=".activity.view.WareDetailActivity" />
+        <activity android:name=".activity.view.ImageBrowseActivity"></activity>
     </application>
 
 </manifest>
