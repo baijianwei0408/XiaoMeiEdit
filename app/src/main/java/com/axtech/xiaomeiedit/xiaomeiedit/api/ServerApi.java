@@ -40,6 +40,10 @@ public interface ServerApi {
     @POST("/user/login")
     Observable<LoginBean> login(@FieldMap Map<String, Object> map);
 
+    @FormUrlEncoded
+    @POST("/user/login/switchMerchant")
+    Observable<BaseBean> switchMerchant(@FieldMap Map<String, Object> map);
+
     @GET("/lease/search")
     Observable<WareBean> getWare(@QueryMap Map<String, Object> map);
 

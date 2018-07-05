@@ -25,6 +25,37 @@ public class LoginBean extends BaseBean {
         private AccountCounterBean accountCounter;
         private UserBean user;
         private String token;
+        private List<ChooseMerchantBean> chooseMerchant;
+
+        public List<ChooseMerchantBean> getChooseMerchant() {
+            return chooseMerchant;
+        }
+
+        public void setChooseMerchant(List<ChooseMerchantBean> chooseMerchant) {
+            this.chooseMerchant = chooseMerchant;
+        }
+
+        public static class ChooseMerchantBean {
+
+            private String name;
+            private String id;
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+        }
 
         public RealNameBean getRealName() {
             return realName;
@@ -80,6 +111,27 @@ public class LoginBean extends BaseBean {
 
         public void setToken(String token) {
             this.token = token;
+        }
+
+        public static class ChooseMerchant {
+            private String name;
+            private String id;
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
         }
 
         public static class RealNameBean {

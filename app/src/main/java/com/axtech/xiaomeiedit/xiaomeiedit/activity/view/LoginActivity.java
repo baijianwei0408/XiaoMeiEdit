@@ -1,23 +1,29 @@
 package com.axtech.xiaomeiedit.xiaomeiedit.activity.view;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.axtech.xiaomeiedit.xiaomeiedit.R;
+import com.axtech.xiaomeiedit.xiaomeiedit.activity.bean.LoginBean;
 import com.axtech.xiaomeiedit.xiaomeiedit.activity.persenter.LoginPersenter;
 import com.axtech.xiaomeiedit.xiaomeiedit.application.XiaoMeiEditApplication;
 import com.axtech.xiaomeiedit.xiaomeiedit.base.BaseActivity;
@@ -196,6 +202,33 @@ public class LoginActivity extends BaseActivity {
         this.showSmsButton();
 
         this.showPassword(showPasswordImageView);
+    }
+
+
+    public void chooseMerchant(final LoginBean loginBean) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog dialog = builder.create();
+        View view = View.inflate(this, R.layout.alert_login, null);
+        LinearLayout loginAlert = view.findViewById(R.id.loginAlert);
+        for (final LoginBean.ResultBean.ChooseMerchantBean chooseMerchant : loginBean.getResult().getChooseMerchant()) {
+            TextView textView = new TextView(this);
+            textView.setText(chooseMerchant.getName());
+            textView.setGravity(Gravity.CENTER);
+            textView.setTextColor(Color.BLACK);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            layoutParams.setMargins(0, 20, 0, 20);
+            textView.setLayoutParams(layoutParams);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    loginPersenter.switchMerchant(chooseMerchant.getId(), loginBean.getResult().getToken());
+                    dialog.dismiss();
+                }
+            });
+            loginAlert.addView(textView);
+        }
+        dialog.setView(view);
+        dialog.show();
     }
 
     // 定义一个变量，来标识是否退出

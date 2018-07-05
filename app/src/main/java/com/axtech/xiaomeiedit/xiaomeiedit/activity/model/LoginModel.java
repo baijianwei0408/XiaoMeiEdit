@@ -17,4 +17,8 @@ public class LoginModel {
         Api.request(context, Api.getServerApi().login(map), httpCallBack);
     }
 
+    public void switchMerchant(Context context, Map<String, Object> map, ApiUtil.HttpCallBack httpCallBack) {
+        Api.request(context, Api.getServerApi().switchMerchant(map), httpCallBack);
+    }
+
 }

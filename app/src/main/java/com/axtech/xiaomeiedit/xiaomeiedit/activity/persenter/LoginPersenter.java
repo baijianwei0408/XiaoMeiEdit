@@ -10,6 +10,7 @@ import com.axtech.xiaomeiedit.xiaomeiedit.activity.view.IndexActivity;
 import com.axtech.xiaomeiedit.xiaomeiedit.activity.view.LoginActivity;
 import com.axtech.xiaomeiedit.xiaomeiedit.api.ApiUtil;
 import com.axtech.xiaomeiedit.xiaomeiedit.application.XiaoMeiEditApplication;
+import com.axtech.xiaomeiedit.xiaomeiedit.base.BaseBean;
 import com.axtech.xiaomeiedit.xiaomeiedit.utils.SmsUtil;
 import com.axtech.xiaomeiedit.xiaomeiedit.utils.Utils;
 
@@ -47,7 +48,7 @@ public class LoginPersenter implements LoginPersenterInterface {
     @Override
     public void loginByPassword(String telephone, String password) {
         map = new HashMap<>();
-        map.put("client", "APK");
+        map.put("client", "XM_EDIT");
         map.put("telephone", telephone);
         map.put("password", password);
         login(map);
@@ -56,7 +57,7 @@ public class LoginPersenter implements LoginPersenterInterface {
     @Override
     public void loginBySms(String telephone, String smsCode) {
         map = new HashMap<>();
-        map.put("client", "APK");
+        map.put("client", "XM_EDIT");
         map.put("telephone", telephone);
         map.put("smsCode", smsCode);
         map.put("smsToken", smsToken);
@@ -67,8 +68,30 @@ public class LoginPersenter implements LoginPersenterInterface {
         loginModel.login(loginActivity, map, new ApiUtil.HttpCallBack<LoginBean>() {
             @Override
             public void callBack(LoginBean loginBean) {
+                if (loginBean.getResult().getChooseMerchant() == null) {
+                    // 无可选店铺
+                    Utils.showToast(loginActivity, "登录成功");
+                    Utils.putSharedPreferences("token", loginBean.getResult().getToken());
+                    Intent intent = new Intent(loginActivity, IndexActivity.class);
+                    loginActivity.startActivity(intent);
+                    loginActivity.finish();
+                } else {
+                    // 有可选店铺
+                    loginActivity.chooseMerchant(loginBean);
+                }
+            }
+        });
+    }
+
+    public void switchMerchant(String merchantId, final String token) {
+        map = new HashMap<>();
+        map.put("access-token", token);
+        map.put("merchantId", merchantId);
+        loginModel.switchMerchant(loginActivity, map, new ApiUtil.HttpCallBack<BaseBean>() {
+            @Override
+            public void callBack(BaseBean baseBean) {
                 Utils.showToast(loginActivity, "登录成功");
-                Utils.putSharedPreferences("token", loginBean.getResult().getToken());
+                Utils.putSharedPreferences("token", token);
                 Intent intent = new Intent(loginActivity, IndexActivity.class);
                 loginActivity.startActivity(intent);
                 loginActivity.finish();
