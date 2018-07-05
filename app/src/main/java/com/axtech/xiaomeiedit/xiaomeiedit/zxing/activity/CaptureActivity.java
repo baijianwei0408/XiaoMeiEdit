@@ -137,8 +137,8 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
                 title.setText("扫描");
                 scan.setImageResource(R.mipmap.scan_scan_on);
                 input.setImageResource(R.mipmap.scan_input_off);
-                scanText.setTextColor(getColor(R.color.colorGold));
-                inputText.setTextColor(getColor(R.color.colorWhite));
+                scanText.setTextColor(getResources().getColor(R.color.colorGold));
+                inputText.setTextColor(getResources().getColor(R.color.colorWhite));
             }
         });
         inputBox.setOnClickListener(new View.OnClickListener() {
@@ -154,8 +154,8 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
                 title.setText("手动输入");
                 scan.setImageResource(R.mipmap.scan_scan_off);
                 input.setImageResource(R.mipmap.scan_input_on);
-                scanText.setTextColor(getColor(R.color.colorWhite));
-                inputText.setTextColor(getColor(R.color.colorGold));
+                scanText.setTextColor(getResources().getColor(R.color.colorWhite));
+                inputText.setTextColor(getResources().getColor(R.color.colorGold));
             }
         });
 

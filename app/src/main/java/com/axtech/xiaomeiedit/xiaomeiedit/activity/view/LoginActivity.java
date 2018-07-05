@@ -215,6 +215,7 @@ public class LoginActivity extends BaseActivity {
             textView.setText(chooseMerchant.getName());
             textView.setGravity(Gravity.CENTER);
             textView.setTextColor(Color.BLACK);
+            textView.setTextSize(20);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             layoutParams.setMargins(0, 20, 0, 20);
             textView.setLayoutParams(layoutParams);
