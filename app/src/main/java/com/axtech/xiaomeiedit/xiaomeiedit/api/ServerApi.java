@@ -28,9 +28,9 @@ public interface ServerApi {
     // 开发环境
 //    String BASE_URL = "http://10.0.0.163:8838";
     // 测试环境
-//    String BASE_URL = "https://t-gw.9999ax.com";
+    String BASE_URL = "https://t-gw.9999ax.com";
     // 生产环境
-    String BASE_URL = "https://gw.9999ax.com";
+//    String BASE_URL = "https://gw.9999ax.com";
 
     @FormUrlEncoded
     @POST("/sms/sms/rand")
