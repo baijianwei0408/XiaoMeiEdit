@@ -54,6 +54,7 @@ import android.widget.Toast;
 import com.axtech.xiaomeiedit.xiaomeiedit.AutoFitTextureView;
 import com.axtech.xiaomeiedit.xiaomeiedit.R;
 import com.axtech.xiaomeiedit.xiaomeiedit.activity.bean.WareBean;
+import com.axtech.xiaomeiedit.xiaomeiedit.activity.bean.WareDetailBean;
 import com.axtech.xiaomeiedit.xiaomeiedit.api.Api;
 import com.axtech.xiaomeiedit.xiaomeiedit.api.ApiUtil;
 import com.axtech.xiaomeiedit.xiaomeiedit.base.BaseBean;
@@ -96,10 +97,10 @@ public class TakePictureFragment extends Fragment implements View.OnClickListene
 
     private PicAdapter adapter;
 
-    private WareBean wareBean;
+    private WareDetailBean wareBean;
 
     @SuppressLint("ValidFragment")
-    public TakePictureFragment(WareBean wareBean) {
+    public TakePictureFragment(WareDetailBean wareBean) {
         this.wareBean = wareBean;
     }
 
@@ -150,7 +151,7 @@ public class TakePictureFragment extends Fragment implements View.OnClickListene
                     RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                     MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
                     MultipartBody.Part token = MultipartBody.Part.createFormData("access-token", Utils.getSharePerference("token"));
-                    MultipartBody.Part storageId = MultipartBody.Part.createFormData("storageId", wareBean.getRows().get(0).getStorageId());
+                    MultipartBody.Part storageId = MultipartBody.Part.createFormData("storageId", wareBean.getRows().get(0).getMainImage().getStorageId());
                     MultipartBody.Part type = MultipartBody.Part.createFormData("type", i == 0 ? "MAIN" : "DETAIL");
                     MultipartBody.Part code = MultipartBody.Part.createFormData("code", String.valueOf(i + 1));
                     List<MultipartBody.Part> list = new ArrayList<>();

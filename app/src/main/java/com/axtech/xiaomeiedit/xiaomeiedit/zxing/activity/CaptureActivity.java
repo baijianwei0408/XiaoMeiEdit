@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.axtech.xiaomeiedit.xiaomeiedit.R;
 import com.axtech.xiaomeiedit.xiaomeiedit.activity.bean.WareBean;
+import com.axtech.xiaomeiedit.xiaomeiedit.activity.bean.WareDetailBean;
 import com.axtech.xiaomeiedit.xiaomeiedit.activity.view.TakePictureActivity;
 import com.axtech.xiaomeiedit.xiaomeiedit.activity.view.WareDetailActivity;
 import com.axtech.xiaomeiedit.xiaomeiedit.api.Api;
@@ -178,23 +179,19 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
 
 
     private void sendRequest(final String serial) {
-        final Map<String, Object> map = new HashMap<>();
-        map.put("access-token", Utils.getSharePerference("token"));
-        map.put("query", serial);
-        map.put("type", "goods");
-        Api.request(CaptureActivity.this, Api.getServerApi().getWare(map), new ApiUtil.HttpCallBack<WareBean>() {
+        Api.request(CaptureActivity.this, Api.getServerApi().getWareDetail(serial, Utils.getSharePerference("token")), new ApiUtil.HttpCallBack<WareDetailBean>() {
             @Override
-            public void callBack(WareBean wareBean) {
-                if (wareBean.getRows().size() > 0) {
+            public void callBack(WareDetailBean wareDetailBean) {
+                if (wareDetailBean.getRows().size() > 0) {
                     Intent intent;
-                    if (wareBean.getRows().get(0).getImgPath() != null) {
+                    if (wareDetailBean.getRows().get(0).getMainImage() != null) {
                         intent = new Intent(CaptureActivity.this, WareDetailActivity.class);
                     } else {
                         intent = new Intent(CaptureActivity.this, TakePictureActivity.class);
                     }
                     Bundle bundle = new Bundle();
-                    wareBean.setSerial(serial);
-                    bundle.putSerializable("wareBean", wareBean);
+                    wareDetailBean.setSerial(serial);
+                    bundle.putSerializable("wareBean", wareDetailBean);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } else {

@@ -8,6 +8,15 @@ import java.util.List;
 
 public class WareDetailBean extends BaseBean implements Serializable {
 
+    private String serial;
+
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
+    }
 
     private List<RowsBean> rows;
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.axtech.xiaomeiedit.xiaomeiedit.R;
 import com.axtech.xiaomeiedit.xiaomeiedit.activity.bean.WareBean;
+import com.axtech.xiaomeiedit.xiaomeiedit.activity.bean.WareDetailBean;
 import com.axtech.xiaomeiedit.xiaomeiedit.base.BaseActivity;
 
 
@@ -14,7 +15,7 @@ public class TakePictureActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_takepicture);
 
-        WareBean wareBean = (WareBean) getIntent().getSerializableExtra("wareBean");
+        WareDetailBean wareBean = (WareDetailBean) getIntent().getSerializableExtra("wareBean");
         TakePictureFragment fragment = new TakePictureFragment(wareBean);
 
         if (null == savedInstanceState) {
